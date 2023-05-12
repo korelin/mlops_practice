@@ -1,8 +1,10 @@
-import pandas as pd # для работы с табличными данными
-from sklearn.linear_model import LogisticRegression # классификатор лог. регрессии
-import pickle # для (де)сериализации объектов
+import pandas as pd  # для работы с табличными данными
+# Классификатор логистической регрессии
+from sklearn.linear_model import LogisticRegression
+import pickle  # для (де)сериализации объектов
 
-# Загрузка обработанных тренировочных данных из файла train_data_preprocessed.csv
+
+# Загрузка обработанных трен-х данных из файла train_data_preprocessed.csv
 train_data = pd.read_csv('train_preprocessed/train_data_preprocessed.csv')
 
 # Сохранение признаков температура, влажность, давление
