@@ -53,7 +53,7 @@ if line_data is None:
     sys.exit(2)
 
 # %% Вывод графиков
-show_plots = True
+show_plots = False
 if show_plots:
     plot_data(moons_data, circles_data, line_data, 0)
     plot_data(moons_data, circles_data, line_data, 1)
