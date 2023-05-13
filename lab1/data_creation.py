@@ -7,7 +7,6 @@ def data_generator(sample_size: int) -> pd.DataFrame:
     '''
     Создаем синтетический датасет
     '''
-    np.random.seed(1)
 
     feature_A = 20 * np.random.randn(sample_size) + 100
     feature_B = 30 * np.random.randn(sample_size) + 200
