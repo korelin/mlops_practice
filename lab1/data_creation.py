@@ -4,9 +4,7 @@ import pandas as pd
 
 
 def data_generator(sample_size: int) -> pd.DataFrame:
-    '''
-    Создаем синтетический датасет
-    '''
+    '''Создаем синтетический датасет'''
 
     feature_A = 20 * np.random.randn(sample_size) + 100
     feature_B = 30 * np.random.randn(sample_size) + 200
@@ -26,12 +24,14 @@ def data_generator(sample_size: int) -> pd.DataFrame:
     # Зашумляем какой-нибудь столбец Nan
     idx = np.random.randint(0, sample_size, round(sample_size * 0.1))
     df.loc[idx, 'A'] = np.NaN
+
     return df
 
-os.makedirs('./train', exist_ok = True)
+
+os.makedirs('./train', exist_ok=True)
 train_data = data_generator(10000)
 train_data.to_csv('./train/train.csv', sep='\t', encoding='utf-8', index=False)
 
-os.makedirs('./test', exist_ok = True)
+os.makedirs('./test', exist_ok=True)
 train_data = data_generator(1000)
 train_data.to_csv('./test/test.csv', sep='\t', encoding='utf-8', index=False)

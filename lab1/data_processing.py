@@ -1,31 +1,26 @@
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 
-def delete_NaNs(df: pd.DataFrame) -> pd.DataFrame:
-    '''Чистим датафрейм от Nanов'''
 
-    return df.dropna()
+def preprocess_df(df: pd.DataFrame) -> pd.DataFrame:
+    '''Проводим предобработку данных (чистка Nan и стандартизация)'''
+    df = df.dropna()
 
-train = pd.read_csv('./train/train.csv',
-                    sep='\t',
-                    encoding='utf-8',
+    scaler = StandardScaler()
+    df = scaler.fit_transform(df)
+    df = pd.DataFrame(df, columns=train.columns)
+
+    return df
+
+
+train = pd.read_csv('./train/train.csv', sep='\t', encoding='utf-8',
                     usecols=['A', 'B', 'C', 'Y'])
-train = delete_NaNs(train)
 
-scaler = StandardScaler ()
-train_scaler = scaler.fit_transform(train)
-train_scaler_df = pd.DataFrame(train_scaler, columns=train.columns)
+train = preprocess_df(train)
+train.to_csv('./train/train.csv', sep='\t', encoding='utf-8', index=False)
 
-train_scaler_df.to_csv('./train/train.csv', sep='\t', encoding='utf-8', index=False)
+test = pd.read_csv('./test/test.csv', sep='\t', encoding='utf-8',
+                   usecols=['A', 'B', 'C', 'Y'])
 
-test = pd.read_csv('./test/test.csv',
-                    sep='\t',
-                    encoding='utf-8',
-                    usecols=['A', 'B', 'C', 'Y'])
-test = delete_NaNs(test)
-
-scaler = StandardScaler ()
-test_scaler = scaler.fit_transform(test)
-test_scaler_df = pd.DataFrame(test_scaler, columns=test.columns)
-
-test_scaler_df.to_csv('./test/test.csv', sep='\t', encoding='utf-8', index=False)
+test = preprocess_df(test)
+test.to_csv('./test/test.csv', sep='\t', encoding='utf-8', index=False)

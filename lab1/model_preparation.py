@@ -3,10 +3,7 @@ from sklearn.linear_model import LinearRegression
 import pickle
 
 
-'''
-Обучаем модель
-'''
-
+'''Обучаем модель'''
 
 df = pd.read_csv('./train/train.csv',
                  sep='\t',
@@ -19,6 +16,5 @@ train_X = df.drop('Y', axis=1)
 model = LinearRegression()
 model.fit(train_X, train_y)
 
-pkl_filename = 'pickle_model.pkl'
-with open(pkl_filename, 'wb') as file:
+with open('model.pkl', 'wb') as file:
     pickle.dump(model, file)
