@@ -1,3 +1,4 @@
+[![Tests](https://github.com/Zagalskiy/mlops_practice/actions/workflows/python-app.yml/badge.svg)](https://github.com/Zagalskiy/mlops_practice/actions/workflows/python-app.yml)
 # Practices for MLops course UrFU + SkillFactory
 ## Module 1
 <details>
