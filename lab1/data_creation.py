@@ -11,7 +11,7 @@ train_data = pd.DataFrame({
 })
 
 # Добавляем метку в train в зависимости от температуры
-train_data['label'] = np.where(train_data['temperature'] > 30, 1, 0) 
+train_data['label'] = np.where(train_data['temperature'] > 30, 1, 0)
 
 # Создание тестовой выборки
 test_data = pd.DataFrame({
