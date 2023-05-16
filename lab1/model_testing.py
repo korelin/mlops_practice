@@ -1,7 +1,8 @@
 import pandas as pd
 import pickle
 
-# Загрузка обработанных данных из файлов
+
+# Загрузка предобработанных тестовых данных из файлов
 test_data = pd.read_csv('test_preprocessed/test_data_preprocessed.csv')
 
 # Загрузка модели из файла
