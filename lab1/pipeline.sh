@@ -1,5 +1,9 @@
 #!/bin/bash
-python3 data_creation.py
-python3 data_preprocessing.py
-python3 model_preparation.py
-python3 model_testing.py
+scriptdir="$( dirname -- "$BASH_SOURCE"; )";
+
+pip install tensorflow Pillow
+
+python3 "$scriptdir/data_creation.py" > /dev/null 2>&1
+python3 "$scriptdir/data_preprocessing.py" > /dev/null 2>&1
+python3 "$scriptdir/model_preparation.py" > /dev/null 2>&1
+python3 "$scriptdir/model_testing.py"
