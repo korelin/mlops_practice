@@ -22,6 +22,9 @@ if __name__ == "__main__":
     if namespace.dir:
         file_path = namespace.dir
 
+if not file_path.endswith("/"):
+    file_path=f"{file_path}/"
+
 # Если пути не существует, скрипт прерывает свою работу
 if (not os.path.isdir(file_path)) or \
         (not os.path.isdir(file_path + 'train/')) or \
