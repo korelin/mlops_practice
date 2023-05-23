@@ -7,17 +7,23 @@ import tensorflow as tf
 
 initial_path = os.getcwd()
 working_path = os.path.dirname(os.path.abspath(__file__))
-
-
 os.chdir(working_path)
 
+TRAIN_FOLDER = "train"
+MODEL_FOLDER = "xception_network_cats_and_dogs"
+CHECKPOINTS_FOLDER = "xception_network_cats_and_dogs_checkpoints"
 
 IMAGE_SIZE = (180, 180)
-BATCH_SIZE = 32
+BATCH_SIZE = 64
+EPOCHS = 20
+
+# Очищаем workspace от сохранённых обученных моделей от предыдущих запусков.
+os.system("rm -rf {0}".format(CHECKPOINTS_FOLDER))
+os.system("rm -rf {0}".format(MODEL_FOLDER))
 
 
 training_images = tf.keras.utils.image_dataset_from_directory(
-    "PetImages",
+    TRAIN_FOLDER,
     labels='inferred',
     image_size = IMAGE_SIZE,
     batch_size = BATCH_SIZE,
@@ -25,7 +31,7 @@ training_images = tf.keras.utils.image_dataset_from_directory(
 
 
 # Буферизируем ввод.
-training_images = training_images.prefetch(buffer_size=32)
+training_images = training_images.prefetch(buffer_size = BATCH_SIZE)
 
 
 # Метод для создания модели Xception network.
@@ -85,11 +91,10 @@ xception_network_cats_and_dogs = build_xception_network(input_shape = IMAGE_SIZE
 
 
 # Обучаем нейронную сеть.
-EPOCHS = 20
 
 # callback для сохранения результатов обучения в формате Keras (h5) после каждой эпохи обучения.
 callbacks = [
-    tf.keras.callbacks.ModelCheckpoint("xception_network_cats_and_dogs_checkpoints/epoch_{epoch}.h5")
+    tf.keras.callbacks.ModelCheckpoint(CHECKPOINTS_FOLDER+"/epoch_{epoch}.h5")
 ]
 xception_network_cats_and_dogs.compile(
     optimizer=tf.keras.optimizers.Adam(1e-3),
@@ -102,7 +107,7 @@ model_history = xception_network_cats_and_dogs.fit(
 
 
 # Сохраняем модель целиком в формате TensorFlow (saved_model.pb + variables/).
-xception_network_cats_and_dogs.save("xception_network_cats_and_dogs");
+xception_network_cats_and_dogs.save(MODEL_FOLDER);
 
 
 os.chdir(initial_path)
