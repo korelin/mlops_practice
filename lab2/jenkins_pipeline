@@ -1,10 +1,16 @@
-pipeline {
-    agent any
-    stages {
-     stage('Hello') {
-                steps {
-                    echo 'Hello world'
-                }
-            }
-     }
-}
+#!/bin/bash
+echo "----Import library-----"
+pip install pandas
+pip install numpy
+pip install scikit-learn
+echo "----Create Dataset (begin)-----"
+python3 /home/server/study/MLOps/lab1/data_creation.py
+echo "----Create Dataset (end)-----"
+echo "----Processing Dataset (begin)-----"
+python3 /home/server/study/MLOps/lab1/data_processing.py
+echo "----Processing Dataset (end)-----"
+echo "----Use the Model for Preparation-----"
+python3 /home/server/study/MLOps/lab1/model_preparation.py
+echo "----Use the Model for Testing-----"
+python3 /home/server/study/MLOps/lab1/model_testing.py
+
