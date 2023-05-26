@@ -12,14 +12,6 @@ pipeline {
             }
         }
 
-        stage('Libraries Installation') {
-            steps {
-                sh 'pip install numpy'
-                sh 'pip install pandas'
-                sh 'pip install scikit-learn'
-            }
-        }
-
         stage('Data creation') {
             steps {
                 sh 'python3 lab1/data_creation.py'
