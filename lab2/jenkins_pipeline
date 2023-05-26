@@ -1,10 +1,54 @@
 pipeline {
     agent any
     stages {
-     stage('Hello') {
-                steps {
-                    echo 'Hello world'
-                }
+        stage("Git Checkout") {
+            steps {
+                git(
+                    url: "https://github.com/andy-kuzn/mlops_practice.git",
+                    branch: "master",
+                    changelog: true,
+                    poll: true
+                )
             }
-     }
+        }
+
+        stage('Libraries Installation') {
+            steps {
+                sh 'pip install numpy'
+                sh 'pip install pandas'
+                sh 'pip install scikit-learn'
+            }
+        }
+
+        stage('Data creation') {
+            steps {
+                sh 'python3 lab1/data_creation.py'
+            }
+        }
+
+        stage('Data processing') {
+            steps {
+                sh 'python3 lab1/data_preprocessing.py'
+            }
+        }
+
+        stage('Model preparation') {
+            steps {
+                sh 'python3 lab1/model_preparation.py'
+            }
+        }
+
+        stage('Model testing') {
+            steps {
+                sh 'python3 lab1/model_testing.py'
+            }
+        }
+    }
+
+    post {
+        always {
+            archiveArtifacts artifacts: '**/*', fingerprint: true
+            sh 'echo "The pipeline has finished"'
+        }
+    }
 }
