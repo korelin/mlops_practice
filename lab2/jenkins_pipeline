@@ -39,8 +39,10 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: '**/*', fingerprint: true
-            sh 'echo "The pipeline has finished"'
+            archiveArtifacts artifacts: '**/*', 
+                allowEmptyArchive: true,
+                fingerprint: true,
+                onlyIfSuccessful: true
         }
     }
 }
