@@ -2,13 +2,14 @@
 
 script_dir=$1
 data_dir=$2
+dataset_name=$3
 
 # Директории для данных
 if  [ -z  "${data_dir}" ]
 then
 #   data_dir="$HOME/content$(date +%Y%m%d%H%M%S)"
 #   data_dir="$(pwd)/content$(date +%Y%m%d%H%M%S)"
-   data_dir="$(pwd)/content1"
+   data_dir="$(pwd)/content"
 fi
 
 if  [ -z  "${script_dir}" ]; then
@@ -24,6 +25,9 @@ if [ !  -r "$script_dir" ] ; then
   echo "Программа завершена."
   exit 4
 fi
+
+if  [ -z  "${data_type}" ]
+  dataset_name = 'moons'
 
 mkdir -m ug+rw -p "$data_dir"
 mkdir -m ug+rw -p "$data_dir/test"
@@ -56,7 +60,7 @@ do
     chmod ugo+x "$full_path"
 
     #result=python3 "$full_path" -d "$data_dir"
-    if  python3 "$full_path" -d "$data_dir"
+    if  python3 "$full_path" -d "$data_dir" -t "dataset_name"
     then
       echo   "$python_script is done"
     else
