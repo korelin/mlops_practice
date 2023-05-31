@@ -20,7 +20,7 @@ x_max = 20
 x = np.array([random.randint(x_min, x_max) for i in range(50)])
 
 # Генерируем шум. 
-noise = 200
+noise = 800
 e = np.array([random.randint(-noise, noise) for i in range(50)])
 
 # Генерируем значения целевой переменной y.
