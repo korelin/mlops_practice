@@ -2,12 +2,11 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 
 
-def plot_data(dataset, dataset_name, i=0):
+def plot_data(dataset, dataset_name):
     """
     Вывод графиков для 3-х наборов данных
     :param dataset: Дата-фрейм набора данных
     :param dataset_name: Название дата-фрейма набора данных
-    :param i: Номер набора: 0 - обучающий, 1- тестовый
     :return: Выводит 3 графика
     """
     colors = ("#FF0000", '#0000FF')
@@ -17,7 +16,7 @@ def plot_data(dataset, dataset_name, i=0):
 
     plt.figure(figsize=(30, 8))
 
-    plt.scatter(dataset[i]['x'].values, dataset[i]['y'].values, marker='o', c=dataset[i]['z'].values,
+    plt.scatter(dataset.iloc[:,0].values, dataset.iloc[:,1].values, marker='o', c=dataset.iloc[:,2].values,
                 cmap=cm_bright, s=s, alpha=alpha)
     plt.title(dataset_name)
 

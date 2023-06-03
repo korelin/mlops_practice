@@ -26,8 +26,9 @@ if [ !  -r "$script_dir" ] ; then
   exit 4
 fi
 
-if  [ -z  "${data_type}" ]
-  dataset_name = 'moons'
+if  [ -z  "${data_type}" ]; then
+  dataset_name='moons'
+fi
 
 mkdir -m ug+rw -p "$data_dir"
 mkdir -m ug+rw -p "$data_dir/test"
@@ -40,7 +41,10 @@ if [[  ! -r "$data_dir" || ! -w "$data_dir" ]] ; then
 fi
 
 # Если venv не установлен:
-#sudo apt-get install python3-venv
+if [ $(dpkg-query -W -f='${Status}' 'python3-venv' | grep -c 'ok installed') -eq 0 ];
+then
+  sudo apt-get install python3-venv
+fi
 
 venv_dir="$script_dir/env"
 
@@ -59,12 +63,10 @@ do
     echo "Executing $python_script"
     chmod ugo+x "$full_path"
 
-    #result=python3 "$full_path" -d "$data_dir"
     if  python3 "$full_path" -d "$data_dir" -t "dataset_name"
     then
       echo   "$python_script is done"
     else
-    #  echo $result
       echo    "$python_script is not done"
     fi
   else
