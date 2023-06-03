@@ -4,11 +4,9 @@
 # %% Импорт
 import argparse
 import os
-
 import sys
 
-from generate_data import make_data, devide_save
-from plot_data import plot_data
+from data_methods import make_data, devide_save
 
 
 # %% Задание пути для сохранения файлов
@@ -30,7 +28,7 @@ if __name__ == "__main__":
 if not file_path.endswith("/"):
     file_path=f"{file_path}/"
 
-# Если пути не существует, скрипт прерывает свою работу
+#%% Если пути не существует, скрипт прерывает свою работу
 if (not os.path.isdir(file_path)) or \
         (not os.path.isdir(file_path + 'train/')) or \
         (not os.path.isdir(file_path + 'test/')):
@@ -47,10 +45,6 @@ seed = 38
 
 dataset_data = devide_save(*make_data(count, method='moons',
                                     noises=0.15, random_state=seed), file_path, dataset_name)
+
 if dataset_data is None:
     sys.exit(2)
-
-# %% Вывод графиков
-show_plots = False
-if show_plots:
-    plot_data(dataset_data, dataset_name, 0)
