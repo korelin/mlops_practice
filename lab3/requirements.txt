@@ -47,7 +47,8 @@ tenacity==8.2.2
 tokenizers==0.13.3
 toml==0.10.2
 toolz==0.12.0
-torch==2.0.1
+--find-links https://download.pytorch.org/whl/torch_stable.html
+torch==2.0.1+cpu
 tornado==6.3.2
 tqdm==4.65.0
 transformers==4.29.2
