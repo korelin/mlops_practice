@@ -1,10 +1,12 @@
 """
 Методы работы с данными
 """
+import pickle
 import numpy as np
 import pandas as pd
 from sklearn.datasets import make_moons, make_circles, make_classification
 from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
 
 from detail_params import l2_nom, l1_nom, godn, brak, godn_name, brak_name
 
@@ -147,4 +149,24 @@ def transforms(file_name, scaler):
 
     except:
         print(f"Ошибка сохранения файла {file_name}")
+        return None
+
+#%% Загрузим, обучим и сохраним модель
+def train_and_save_model(X_train, y_train, file_path, file_name):
+    """
+    Загрузка, обучение и сохранение модели
+    :param X_train: x, y params of dataset
+    :param y_train: target
+    :param file_path: path to content folder
+    :param file_name: name of opened file
+    """
+    model = LogisticRegression(max_iter=100_000).fit(X_train, y_train)
+    file_name = file_name.replace("_stand.csv", "_model.pkl")
+    file_path = file_path + file_name
+    try:
+        pickle.dump(model, open(file_path, 'wb'))
+        print(f"Model succesfully generated {file_path}")
+        return  model
+    except Exception as inst:
+        print(f"Ошибка сохранения файла {file_name} {inst.args}")
         return None

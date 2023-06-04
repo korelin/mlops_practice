@@ -6,9 +6,9 @@ import argparse
 import os
 import sys
 import pandas as pd
-import pickle
 
-from sklearn.linear_model import LogisticRegression
+from data_methods import train_and_save_model
+
 
 #Задаем путь для сохранения модели, а так же пути для чтения датасета
 file_path = os.getcwd()
@@ -35,25 +35,6 @@ if (not os.path.isdir(file_path)) or \
         (not os.path.isdir(file_path + 'test/')):
     print("There is no such file")
     sys.exit(1)
-
-#%% Загрузим, обучим и сохраним модель
-def train_and_save_model(X_train, y_train, file_path, file_name):
-    """
-    :param X_train: x, y params of dataset
-    :param y_train: target
-    :param file_path: path to content folder
-    :param file_name: name of opened file
-    """
-    model = LogisticRegression(max_iter=100_000).fit(X_train, y_train)
-    file_name = file_name.replace("_stand.csv", "_model.pkl")
-    file_path = file_path + file_name
-    try:
-        pickle.dump(model, open(file_path, 'wb'))
-        print(f"Model succesfully generated {file_path}")
-        return  model
-    except:
-        print(f"Ошибка сохранения файла {file_name}")
-        return None
 
 for filename in os.listdir(file_path + "train/"):
     if filename.endswith("_stand.csv"):
