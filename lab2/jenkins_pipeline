@@ -1,9 +1,34 @@
 pipeline {
     agent any
     stages {
-     stage('Hello') {
+        stage('Preparation enviroment') {
                 steps {
-                    echo 'Hello world'
+                    scriptdir="$( dirname -- "$BASH_SOURCE"; )";
+                    pip install tensorflow Pillow
+                }
+            }
+        stage('Data preparation') {
+                steps {
+                    echo "----Create dataset start-----"
+                    sudo python3 "$scriptdir/data_creation.py"
+                    echo "----Create dataset end-----"
+                    echo "----Preprocessing data start-----"
+                    sudo python3 "$scriptdir/data_preprocessing.py"
+                    echo "----Preprocessing data end-----"
+                }
+            }
+        stage('Model educate') {
+                steps {
+                    echo "----Model educate start-----"
+                    sudo python3 "$scriptdir/model_preparation.py"
+                    echo "----Model educate end-----"
+                }
+            }
+        stage('Model tetsting') {
+                steps {
+                    echo "----Model test start-----"
+                    sudo python3 -W ignore "$scriptdir/model_testing.py"
+                    echo "----Model test end-----"
                 }
             }
      }
