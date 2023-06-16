@@ -1,8 +1,4 @@
-import streamlit as st
-from sbert_punc_case_ru import SbertPuncCase
-from langdetect import detect
-from langdetect.lang_detect_exception import LangDetectException
-import string
+
 
 
 def check_input(input_text):
