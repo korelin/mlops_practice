@@ -1,3 +1,9 @@
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+
+# Загружаем тренировочную и тестовую выборки.
+train_data = pd.read_csv('train/data.csv')
+test_data = pd.read_csv('test/data.csv')
 
 # Выполняем предобработку данных.
 scaler = StandardScaler().fit(train_data[['x', 'y']])
