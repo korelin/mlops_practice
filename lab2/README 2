@@ -1,3 +1,7 @@
 В Jenkins-pipeline были использованы 4 Python-скрипта из Лабораторной работы # 1
 (data_creation.py, data_preprocessing.py, model_preparation.py и model_testing.py).
 Копии этих файлов были помещены в данную папку.
+
+Участники команды:
+
+Андрей Кузнецов, Денис Самаркин, Роман Николаенко
