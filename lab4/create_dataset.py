@@ -1,5 +1,3 @@
-from catboost.datasets import titanic
-import pandas as pd
 
 # Загружаем тренировочный и тестовый датасеты и объединяем их в один.
 titanic_train, titanic_test = titanic()
