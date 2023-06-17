@@ -1,0 +1,29 @@
+pipeline {
+
+    agent {
+        dockerfile {
+            filename 'Dockerfile'
+            additionalBuildArgs '--tag=ml-ci-cd'
+            dir '.'
+        }
+    }
+
+    stages {
+
+        stage('Fetch and prepare data') {
+            steps {
+                sh 'python fetch_data.py'
+            }
+        }
+        stage('Train model') {
+            steps {
+                sh 'python train_model.py'
+            }
+        }
+        stage('Evaluate model') {
+            steps {
+                sh 'python evaluate_model.py'
+            }
+        }
+    }
+}
