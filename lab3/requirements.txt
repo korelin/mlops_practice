@@ -1,0 +1,2 @@
+fastapi==0.96.0
+transformers==4.28.1
