@@ -1,0 +1,5 @@
+pytest
+httpx
+fastapi
+uvicorn
+transformers[torch]

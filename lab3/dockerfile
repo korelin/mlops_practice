@@ -1,0 +1,14 @@
+FROM ubuntu:22.04
+
+RUN apt update && apt install -y wget unzip python3 python3-pip uvicorn
+
+WORKDIR /usr/src
+
+RUN wget https://github.com/ViktorRtm/simple_ml/archive/refs/heads/main.zip
+RUN unzip main.zip simple_ml-main/requirements.txt simple_ml-main/api_answering.py && \
+  mv simple_ml-main/* . && rm -r simple_ml-main && rm main.zip
+RUN pip install -r requirements.txt
+
+EXPOSE 8000
+
+CMD [ "uvicorn", "api_answering:app", "--host=0.0.0.0" ]
