@@ -1,0 +1,89 @@
+    1  ls
+    2  mkdir lab4
+    3  ls
+    4  cd lab4
+    5  python3 -m venv .venv
+    6  ls -a
+    7  source .venv/bin/activate
+    8  pip
+    9  pip install dvc
+   10  git
+   11  git init
+   12  dvc init
+   13  git commit -m "Init dvc"
+   14  git status
+   15  ls -a
+   16  mkdir datasets
+   17  ls -la
+   18  dvc remote add "mydisk" gdrive://1oYjt4zPvEtUYUZJ6mhwhZdCeKLsNkmM5
+   19  dvc remote list
+   20  git status
+   21  git add .dvc/config
+   22  git status
+   23  git commit -m "Google Disk was added as remote dataset folder"
+   24  nano create_dataset.py
+   25  python3 create_dataset.py
+   26  pip install catboost
+   27  python3 create_dataset.py
+   28  ls
+   29  cd datasets
+   30  ls
+   31  cd ..
+   32  dvc add datasets
+   33  cat datasets.dvc
+   34  git status
+   35  ls
+   36  ls -a
+   37  nano .gitignore
+   38  git status
+   39  git add .gitignore datasets.dvc
+   40  git commit -m "Put datasets under control"
+   41  dvc push -r mydisk
+   42  pip install dvc-gdrive
+   43  dvc push -r mydisk
+   44  nano modify_dataset_1.py
+   45  python3 modify_dataset_1.py
+   46  git status
+   47  nano .gitignore
+   48  git status
+   49  add dvc
+   50  dvc add
+   51  dvc add datasets
+   52  git status
+   53  git commit -a -m "Only 3 columns left"
+   54  dvc push -r mydisk
+   55  nano modify_dataset_2.py
+   56  python3 modify_dataset_2.py
+   57  git status
+   58  dvc add datasets
+   59  git status
+   60  git commit -a -m "Age NANs replaced with mean"
+   61  dvc push -r mydisk
+   62  nano modify_dataset_3.py
+   63  python3 modify_dataset_3.py
+   64  git status
+   65  dvc add datasets
+   66  git status
+   67  git commit -a -m "Sex one hot encoded"
+   68  dvc push -r mydisk
+   69  git reflog
+   70  checkout HEAD^1
+   71  git checkout HEAD^1
+   72  dvc pull -r mydisk
+   73  cat datasets/data.csv
+   74  git log
+   75  git reflog
+   76  dvc pull -r mydisk
+   77  git checkout HEAD^3
+   78  git checkout cf49c15
+   79  dvc pull -r mydisk
+   80  cat datasets/data.csv
+   81  git reflog
+   82  git checkout 5fa5ddc
+   83  dvc pull -r mydisk
+   84  cat datasets/data.csv
+   85  git reflog
+   86  git checkout 1356cbe
+   87  dvc pull -r mydisk
+   88  cat datasets/data.csv
+   89  history > history.txt
